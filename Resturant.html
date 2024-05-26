@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Restaurant Booking Form</title>
+<style>
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: url(https://images.hdqwalls.com/wallpapers/lights-path-abstract-1r.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1{
+    text-align: center;
+    margin: 5% 0%;
+    color: white;
+}
+#bookingForm{
+    color: white;
+  backdrop-filter: blur(5px);
+    padding: 3%;
+    width: 65%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+#bookingForm select{
+    padding: 5px;
+    margin: 15px 0px;
+}
+#bookingForm label {
+    font-size: 25px;
+}
+#bookingForm input{
+    padding: 5px;
+    margin: 15px 0px;
+}
+#bookingForm button{
+    padding: 5px;
+    font-size: 22px;
+}
+</style>
+</head>
+<body>
+
+<h1>Restaurant Booking Form</h1>
+
+<form id="bookingForm">
+
+  <label for="bookingType">Choice of Booking:</label>
+  <select id="bookingType">
+    <option value="fullDay">Full Day Booking</option>
+    <option value="halfDay">Half Day Booking</option>
+    <option value="hourly">Hourly Booking</option>
+  </select>
+
+  <label for="userName">User Name:</label>
+  <input type="text" id="userName" >
+  <span id="user">  </span>
+
+  <label for="mobileNumber">Mobile Number:</label>
+  <input type="tel" id="mobileNumber" >
+  <span id="mob">  </span>
+
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" required>
+
+  <label for="numberOfPersons">No of Persons:</label>
+  <input type="number" id="numberOfPersons" min="1" required>
+
+  <div id="dateContainer">
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+  </div>
+
+  <div id="timeContainer">
+    <label for="time">Time:</label>
+    <input type="time" id="time">
+  </div>
+
+  <div id="slotContainer">
+    <label for="slot">Slot:</label>
+    <select id="slot">
+      <option value="breakfast">Breakfast</option>
+      <option value="lunch">Lunch</option>
+      <option value="dinner">Dinner</option>
+    </select>
+  </div>
+
+  <button type="submit" onclick="validation()">Submit Booking</button>
+
+</form>
+
+<script>
+const bookingForm = document.getElementById('bookingForm');
+const bookingType = document.getElementById('bookingType');
+const dateContainer = document.getElementById('dateContainer');
+const timeContainer = document.getElementById('timeContainer');
+const slotContainer = document.getElementById('slotContainer');
+let userName = document.getElementById("userName");
+let user = document.getElementById("user");
+
+bookingType.addEventListener('change', () => {
+  const selectedType = bookingType.value;
+
+  // Hide all containers
+  dateContainer.style.display = 'none';
+  timeContainer.style.display = 'none';
+  slotContainer.style.display = 'none';
+
+  // Show relevant containers based on selection
+  if (selectedType === 'fullDay' || selectedType === 'halfDay') {
+    dateContainer.style.display = 'block';
+  }
+  if (selectedType === 'halfDay') {
+    slotContainer.style.display = 'block';
+  }
+  if (selectedType === 'hourly') {
+    dateContainer.style.display = 'block';
+    timeContainer.style.display = 'block';
+  }
+});
+
+
+
+function validation(){
+  const userName = document.getElementById('userName').value;
+  const mobileNumber = document.getElementById('mobileNumber').value;
+  const user = document.getElementById('user');
+  const mob = document.getElementById('mob');
+
+  if(userName ==""){
+   
+    user.innerHTML = " please enter user name"
+    user.style.color = "red"
+
+  }
+  else{
+    if(userName.length<3){
+      user.innerHTML = "user name should be more than 3 characters"
+      user.style.color = "red"
+
+    }
+    else{
+      user.innerHTML = ""
+    }
+  }
+
+  if(mobileNumber.length < 9){
+    mob.innerHTML = "mobile number should be 10 digits"
+    mob.style.color = "red"
+  }
+  else{
+    mob.innerHTML = ""
+  }
+
+}
+</script>
+
+</body>
+</html>
